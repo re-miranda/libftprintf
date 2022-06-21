@@ -1,0 +1,3 @@
+*.o
+libftprintf.a
+*.so
