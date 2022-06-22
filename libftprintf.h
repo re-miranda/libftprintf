@@ -6,17 +6,16 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:58:40 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/22 02:50:59 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/06/23 01:42:33 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
-
-#include <stdarg.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "./libft/libft.h"
+# include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include "./libft/libft.h"
 
 typedef struct s_data
 {
@@ -27,11 +26,11 @@ typedef struct s_data
 	va_list			va_ptr;
 	char			valid_flags[6];
 	char			valid_types[9];
-	char			*found_flags;
+	char			found_flags[6];
 	unsigned int	width;
 	unsigned int	precision;
 	char			type;
-} t_data;
+}	t_data;
 
 int		ft_printf(const char *format_string, ...);
 void	ft_result(t_data *data);
@@ -44,5 +43,10 @@ void	ft_format(t_data *data);
 void	ft_type_c(t_data *data);
 void	ft_type_s(t_data *data);
 void	ft_type_d_i(t_data *data);
+void	ft_type_u(t_data *data);
+void	ft_type_x(t_data *data);
+void	ft_type_xx(t_data *data);
+void	ft_type_p(t_data *data);
+void	ft_apply_width(t_data *data);
 
 #endif

@@ -1,4 +1,4 @@
-SRC = libftprintf.c libftprintf_utils.c printf_types.c
+SRC = libftprintf.c libftprintf_utils_part1.c libftprintf_utils_part2.c printf_types_part1.c printf_types_part2.c
 OBJ = $(SRC:%.c=%.o)
 HEADER = ./
 CC = cc
@@ -36,6 +36,6 @@ re: fclean all
 
 main: $(NAME)
 	$(CC) $(CFLAGS) main.c -L./ -lftprintf
-	./a.out
+	clear && ./a.out
 
 .PHONY: all clean fclean re
