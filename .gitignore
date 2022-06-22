@@ -1,3 +1,6 @@
 *.o
 libftprintf.a
 *.so
+main.c
+.nfs00000000076b058300002ea6
+a.out
