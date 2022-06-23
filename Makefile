@@ -1,4 +1,4 @@
-SRC = libftprintf.c libftprintf_utils_part1.c libftprintf_utils_part2.c printf_types_part1.c printf_types_part2.c
+SRC = libftprintf.c libftprintf_utils_part1.c libftprintf_utils_part2.c printf_types_part1.c printf_types_part2.c printf_types_utils.c
 OBJ = $(SRC:%.c=%.o)
 HEADER = ./
 CC = cc
