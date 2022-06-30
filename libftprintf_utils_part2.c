@@ -6,7 +6,7 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 01:45:17 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/23 01:48:18 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/06/30 23:01:00 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void	ft_apply_width(t_data *data)
 void	ft_result(t_data *data)
 {
 	if (data->type == 'c')
-		ft_type_c(data);
+		return (ft_type_c(data));
 	else if (data->type == 's')
-		ft_type_s(data);
+		return (ft_type_s(data));
 	else if (data->type == 'd' || data->type == 'i' )
-		ft_type_d_i(data);
+		return (ft_type_d_i(data));
 	else if (data->type == 'u' )
-		ft_type_u(data);
+		return (ft_type_u(data));
 	else if (data->type == 'x' )
-		ft_type_x(data);
+		return (ft_type_x(data));
 	else if (data->type == 'X' )
-		ft_type_xx(data);
+		return (ft_type_xx(data));
 	else if (data->type == 'p' )
-		ft_type_p(data);
+		return (ft_type_p(data));
 }
 
 void	ft_append_char_to_str(char c, char **str)

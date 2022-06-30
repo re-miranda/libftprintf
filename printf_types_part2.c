@@ -6,78 +6,80 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 01:45:20 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/23 01:46:11 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:57:15 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_type_u(t_data *data)
-{
-	char			*swap;
-	int				result;
-	unsigned int	unsigned_result;
-	char			*str_unsigned_result;
-
-	swap = data->formatted_str;
-	result = va_arg(data->va_ptr, int);
-	unsigned_result = (unsigned int)result;
-	str_unsigned_result = ft_itoa(unsigned_result);
-	data->formatted_str = ft_strjoin(swap, str_unsigned_result);
-	free(swap);
-	free(str_unsigned_result);
-}
-
 void	ft_type_x(t_data *data)
 {
 	char			*swap;
-	int				result;
-	unsigned int	unsigned_result;
-	char			*str_unsigned_result;
+	unsigned int	result;
+	char			*str_result;
+	char			*swap2;
 
 	swap = data->formatted_str;
-	data->formatted_str = ft_strdup(data->formatted_str + 1);
-	return (free(swap));
-	result = va_arg(data->va_ptr, int);
-	unsigned_result = (unsigned int)result;
-	str_unsigned_result = ft_itoa(unsigned_result);
-	data->formatted_str = ft_strjoin(swap, str_unsigned_result);
+	result = va_arg(data->va_ptr, unsigned int);
+	str_result = ft_uint_base_str(result, "0123456789abcdef");
+	if (ft_strchr(data->found_flags, '#'))
+	{
+		swap2 = str_result;
+		str_result = ft_strjoin("0x", str_result);
+		free(swap2);
+	}
+	data->formatted_str = ft_strjoin(swap, str_result);
 	free(swap);
-	free(str_unsigned_result);
+	free(str_result);
 }
 
 void	ft_type_xx(t_data *data)
 {
 	char			*swap;
-	int				result;
-	unsigned int	unsigned_result;
-	char			*str_unsigned_result;
+	unsigned int	result;
+	char			*str_result;
+	int				index;
+	char			*swap2;
 
+	index = 0;
 	swap = data->formatted_str;
-	data->formatted_str = ft_strdup(data->formatted_str + 1);
-	return (free(swap));
-	result = va_arg(data->va_ptr, int);
-	unsigned_result = (unsigned int)result;
-	str_unsigned_result = ft_itoa(unsigned_result);
-	data->formatted_str = ft_strjoin(swap, str_unsigned_result);
+	result = va_arg(data->va_ptr, unsigned int);
+	str_result = ft_uint_base_str(result, "0123456789abcdef");
+	while (str_result[index])
+	{
+		str_result[index] = ft_toupper(str_result[index]);
+		index++;
+	}
+	if (ft_strchr(data->found_flags, '#'))
+	{
+		swap2 = str_result;
+		str_result = ft_strjoin("0X", str_result);
+		free(swap2);
+	}
+	data->formatted_str = ft_strjoin(swap, str_result);
 	free(swap);
-	free(str_unsigned_result);
+	free(str_result);
 }
 
 void	ft_type_p(t_data *data)
 {
 	char			*swap;
-	int				result;
-	unsigned int	unsigned_result;
-	char			*str_unsigned_result;
+	size_t			result;
+	char			*str_result;
+	char			*swap2;
 
 	swap = data->formatted_str;
-	data->formatted_str = ft_strdup(data->formatted_str + 1);
-	return (free(swap));
-	result = va_arg(data->va_ptr, int);
-	unsigned_result = (unsigned int)result;
-	str_unsigned_result = ft_itoa(unsigned_result);
-	data->formatted_str = ft_strjoin(swap, str_unsigned_result);
+	result = va_arg(data->va_ptr, size_t);
+	if (result == 0)
+		str_result = ft_strdup("(nil)");
+	else
+	{
+		str_result = ft_sizet_base_str((size_t)result, "0123456789abcdef");
+		swap2 = str_result;
+		str_result = ft_strjoin("0x", str_result);
+		free(swap2);
+	}
+	data->formatted_str = ft_strjoin(swap, str_result);
 	free(swap);
-	free(str_unsigned_result);
+	free(str_result);
 }

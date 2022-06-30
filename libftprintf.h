@@ -6,7 +6,7 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:58:40 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/23 01:42:33 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:35:37 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ void	ft_type_x(t_data *data);
 void	ft_type_xx(t_data *data);
 void	ft_type_p(t_data *data);
 void	ft_apply_width(t_data *data);
+int		ft_atoi_base(char *str, char *base);
+char	*ft_uint_base_str(unsigned int nbr, char *base);
+char	*ft_uint_str(unsigned int n);
+char	*ft_sizet_base_str(size_t nbr, char *base);
 
 #endif
