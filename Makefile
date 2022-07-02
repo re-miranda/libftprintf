@@ -1,12 +1,12 @@
-SRC = libftprintf.c libftprintf_utils_part1.c libftprintf_utils_part2.c \
-	 printf_types_part1.c printf_types_part2.c printf_types_utils.c \
+SRC = ft_printf.c ft_printf_utils_part1.c ft_printf_utils_part2.c \
+	 ft_printf_types_part1.c ft_printf_types_part2.c ft_printf_types_utils.c \
 	 ft_atoi_base.c ft_uint_base_str.c ft_uint_str.c ft_sizet_base_str.c
 OBJ = $(SRC:%.c=%.o)
 HEADER = ./
 CC = cc
 AR = ar -rcs
 RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -g
 NAME = libftprintf.a
 LIBFT = ./libft/libft.a
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf_utils_part1.c                          :+:      :+:    :+:   */
+/*   ft_printf_utils_part1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:58:43 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/23 01:48:08 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/01 02:22:41 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 void	ft_type(t_data *data)
 {
@@ -33,6 +33,7 @@ void	ft_precision(t_data *data)
 
 void	ft_width(t_data *data)
 {
+	data->width = 0;
 	if (ft_isdigit(*data->src_str))
 		data->width = ft_atoi(data->src_str);
 	while (ft_isdigit(*data->src_str))
@@ -50,12 +51,24 @@ void	ft_flags(t_data *data)
 
 void	ft_format(t_data *data)
 {
+	char	*result;
+	char	*swap;
+
 	data->src_str++;
 	if (*data->src_str == '%')
+	{
+		data->total_bytes_write ++;
+		data->src_str++;
 		return (ft_append_char_to_str('%', &data->formatted_str));
+	}
 	ft_flags(data);
 	ft_width(data);
 	ft_precision(data);
 	ft_type(data);
-	ft_result(data);
+	result = ft_result(data);
+	result = ft_apply_width(data, result);
+	swap = data->formatted_str;
+	data->formatted_str = ft_strjoin(data->formatted_str, result);
+	free(swap);
+	free(result);
 }

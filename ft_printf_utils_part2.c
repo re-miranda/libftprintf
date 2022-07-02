@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf_utils_part2.c                          :+:      :+:    :+:   */
+/*   ft_printf_utils_part2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 01:45:17 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/30 23:01:00 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:02:07 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	ft_apply_width(t_data *data)
+char	*ft_apply_width(t_data *data, char *result)
 {
 	int		missing_width;
 	char	*swap;
 	char	*padding;
 	char	padding_type;
 
-	missing_width = data->width - data->total_bytes_write;
-	swap = data->formatted_str;
+	missing_width = data->width - ft_strlen(result);
+	swap = result;
 	padding_type = ' ';
 	if (ft_strchr(data->found_flags, '0'))
 	{
@@ -33,15 +33,16 @@ void	ft_apply_width(t_data *data)
 		padding = ft_calloc(sizeof(char), missing_width + 1);
 		ft_memset(padding, padding_type, missing_width);
 		if (ft_strchr(data->found_flags, '-'))
-			data->formatted_str = ft_strjoin(data->formatted_str, padding);
+			result = ft_strjoin(result, padding);
 		else
-			data->formatted_str = ft_strjoin(padding, data->formatted_str);
+			result = ft_strjoin(padding, result);
 		free(padding);
 		free(swap);
 	}
+	return (result);
 }
 
-void	ft_result(t_data *data)
+char	*ft_result(t_data *data)
 {
 	if (data->type == 'c')
 		return (ft_type_c(data));
@@ -57,6 +58,7 @@ void	ft_result(t_data *data)
 		return (ft_type_xx(data));
 	else if (data->type == 'p' )
 		return (ft_type_p(data));
+	return (NULL);
 }
 
 void	ft_append_char_to_str(char c, char **str)

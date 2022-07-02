@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uint_base_str copy.c                            :+:      :+:    :+:   */
+/*   ft_sizet_base_str.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:08:42 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/30 22:34:10 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:02:29 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_nbrlen(size_t n, int base_count)
 {
@@ -33,7 +33,7 @@ static int	base_test(char *base, int i, int base_count)
 static void	recursive_write(size_t nbr, char *base, int base_count, char *str, int str_len)
 {
 	str[str_len] = base[nbr % base_count];
-	if (nbr > (size_t)base_count)
+	if (nbr >= (size_t)base_count)
 		recursive_write(nbr / base_count, base, base_count, str, --str_len);
 }
 

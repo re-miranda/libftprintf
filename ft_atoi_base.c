@@ -6,11 +6,11 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 06:34:18 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/02/18 19:32:37 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:02:38 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	where_in_base(char str, char *base)
 {

@@ -6,11 +6,11 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:08:42 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/30 22:05:59 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:02:25 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_nbrlen(unsigned int n, int base_count)
 {
@@ -32,20 +32,8 @@ static int	base_test(char *base, int i, int base_count)
 
 static void	recursive_write(unsigned int nbr, char *base, int base_count, char *str, int str_len)
 {
-	// char	n;
-
-	// n = base[nbr % base_count];
-	// if (nbr < (unsigned int)base_count)
-	// {
-	// 	write(1, &n, 1);
-	// }
-	// else
-	// {
-	// 	recursive_write(nbr / base_count, base, base_count, str, );
-	// 	write(1, &n, 1);
-	// }
 	str[str_len] = base[nbr % base_count];
-	if (nbr > (unsigned int)base_count)
+	if (nbr >= (unsigned int)base_count)
 		recursive_write(nbr / base_count, base, base_count, str, --str_len);
 }
 

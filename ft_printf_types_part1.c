@@ -6,31 +6,37 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 02:37:07 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/30 21:04:29 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/06/30 23:57:58 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-void	ft_type_c(t_data *data)
+char	*ft_type_c(t_data *data)
 {
-	ft_append_char_to_str(va_arg(data->va_ptr, int), &data->formatted_str);
-}
-
-void	ft_type_s(t_data *data)
-{
-	char	*swap;
 	char	*result;
 
-	swap = data->formatted_str;
-	result = va_arg(data->va_ptr, char *);
-	data->formatted_str = ft_strjoin(swap, result);
-	free(swap);
+	result = ft_strdup("0");
+	result[0] = va_arg(data->va_ptr, int);
+	data->total_bytes_write++;
+	return (result);
 }
 
-void	ft_type_d_i(t_data *data)
+char	*ft_type_s(t_data *data)
 {
-	char	*swap;
+	char	*result;
+
+	result = va_arg(data->va_ptr, char *);
+	if (result == NULL)
+		result = ft_strdup("(null)");
+	else
+		result = ft_strdup(result);
+	data->total_bytes_write += ft_strlen(result);
+	return (result);
+}
+
+char	*ft_type_d_i(t_data *data)
+{
 	int		result;
 	char	*str_result;
 
@@ -45,23 +51,18 @@ void	ft_type_d_i(t_data *data)
 		ft_append_char_to_str(' ', &data->formatted_str);
 		*ft_strchr(data->found_flags, ' ') = 0;
 	}
-	swap = data->formatted_str;
 	str_result = ft_itoa(result);
-	data->formatted_str = ft_strjoin(swap, str_result);
-	free(swap);
-	free(str_result);
+	data->total_bytes_write += ft_strlen(str_result);
+	return (str_result);
 }
 
-void	ft_type_u(t_data *data)
+char	*ft_type_u(t_data *data)
 {
-	char			*swap;
 	unsigned int	result;
 	char			*str_result;
 
-	swap = data->formatted_str;
 	result = va_arg(data->va_ptr, unsigned int);
 	str_result = ft_uint_str(result);
-	data->formatted_str = ft_strjoin(swap, str_result);
-	free(swap);
-	free(str_result);
+	data->total_bytes_write += ft_strlen(str_result);
+	return (str_result);
 }

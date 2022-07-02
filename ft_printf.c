@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.c                                      :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:57:49 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/23 01:29:29 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:01:50 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static void	free_data(t_data *data)
 {
@@ -21,7 +21,6 @@ static void	free_data(t_data *data)
 
 static void	formatted_string_to_stdout(t_data *data)
 {
-	ft_apply_width(data);
 	write(1, data->formatted_str, data->total_bytes_write);
 }
 
@@ -33,11 +32,11 @@ static void	interpret_format_string(t_data *data)
 		{
 			ft_append_char_to_str(*data->src_str, &data->formatted_str);
 			data->src_str++;
+			data->total_bytes_write++;
 		}
 		else
 			ft_format(data);
 	}
-	data->total_bytes_write = ft_strlen(data->formatted_str);
 }
 
 static int	intialize(const char *format_string, t_data *data)

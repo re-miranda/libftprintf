@@ -6,11 +6,11 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 22:14:53 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/25 03:05:25 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:02:33 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_.h"
 
 static int	ft_nbrlen(int n)
 {
