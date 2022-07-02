@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_types_part1.c                               :+:      :+:    :+:   */
+/*   ft_printf_types_part1.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 02:37:07 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/30 23:57:58 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/02 22:34:32 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 char	*ft_type_c(t_data *data)
 {
 	char	*result;
+	char	cha;
 
-	result = ft_strdup("0");
-	result[0] = va_arg(data->va_ptr, int);
+	result = ft_strdup("");
+	cha = va_arg(data->va_ptr, int);
+	write(1, &cha, 1);
 	data->total_bytes_write++;
 	return (result);
 }

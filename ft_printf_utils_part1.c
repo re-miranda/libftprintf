@@ -6,7 +6,7 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:58:43 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/07/01 02:22:41 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/02 22:38:37 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	ft_flags(t_data *data)
 void	ft_format(t_data *data)
 {
 	char	*result;
-	char	*swap;
 
 	data->src_str++;
 	if (*data->src_str == '%')
 	{
 		data->total_bytes_write ++;
 		data->src_str++;
-		return (ft_append_char_to_str('%', &data->formatted_str));
+		write(1, "%", 1);
+		return ;
 	}
 	ft_flags(data);
 	ft_width(data);
@@ -67,8 +67,6 @@ void	ft_format(t_data *data)
 	ft_type(data);
 	result = ft_result(data);
 	result = ft_apply_width(data, result);
-	swap = data->formatted_str;
-	data->formatted_str = ft_strjoin(data->formatted_str, result);
-	free(swap);
+	write(1, result, ft_strlen(result));
 	free(result);
 }
