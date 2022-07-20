@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_types_part2.c                               :+:      :+:    :+:   */
+/*   _types_part2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 01:45:20 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/06/30 23:57:53 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/18 09:52:19 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ char	*ft_type_x(t_data *data)
 	swap = data->formatted_str;
 	result = va_arg(data->va_ptr, unsigned int);
 	str_result = ft_uint_base_str(result, "0123456789abcdef");
-	if (ft_strchr(data->found_flags, '#'))
+	if (ft_strchr(data->found_flags, '#') && result)
 	{
 		swap = str_result;
 		str_result = ft_strjoin("0x", str_result);
 		free(swap);
 	}
-	data->total_bytes_write += ft_strlen(str_result);
 	return (str_result);
 }
 
@@ -47,13 +46,12 @@ char	*ft_type_xx(t_data *data)
 		str_result[index] = ft_toupper(str_result[index]);
 		index++;
 	}
-	if (ft_strchr(data->found_flags, '#'))
+	if (ft_strchr(data->found_flags, '#') && result)
 	{
 		swap = str_result;
 		str_result = ft_strjoin("0X", str_result);
 		free(swap);
 	}
-	data->total_bytes_write += ft_strlen(str_result);
 	return (str_result);
 }
 
@@ -74,6 +72,5 @@ char	*ft_type_p(t_data *data)
 		str_result = ft_strjoin("0x", str_result);
 		free(swap);
 	}
-	data->total_bytes_write += ft_strlen(str_result);
 	return (str_result);
 }

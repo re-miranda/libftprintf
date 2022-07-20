@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils_part1.c                            :+:      :+:    :+:   */
+/*   _utils_part1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:58:43 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/07/02 22:38:37 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/11 03:14:39 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_precision(t_data *data)
 {
 	if (*data->src_str == '.')
 		data->src_str++;
+	else
+		return ;
 	data->precision = ft_atoi(data->src_str);
 	while (ft_isdigit(*data->src_str))
 		data->src_str++;
@@ -44,7 +46,8 @@ void	ft_flags(t_data *data)
 {
 	while (ft_strchr(data->valid_flags, *data->src_str))
 	{
-		ft_memset(ft_strchr(data->found_flags, 0), *data->src_str, 1);
+		if (!ft_strchr(data->found_flags, *data->src_str))
+			ft_memset(ft_strchr(data->found_flags, 1), *data->src_str, 1);
 		data->src_str++;
 	}
 }
@@ -53,6 +56,7 @@ void	ft_format(t_data *data)
 {
 	char	*result;
 
+	ft_memset(data->found_flags, 1, 5);
 	data->src_str++;
 	if (*data->src_str == '%')
 	{
@@ -66,7 +70,10 @@ void	ft_format(t_data *data)
 	ft_precision(data);
 	ft_type(data);
 	result = ft_result(data);
+	result = ft_apply_precision(data, result);
+	data->total_bytes_write += ft_strlen(result);
 	result = ft_apply_width(data, result);
 	write(1, result, ft_strlen(result));
 	free(result);
+	data->precision = -1;
 }

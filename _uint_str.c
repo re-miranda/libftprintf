@@ -1,53 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   _uint_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 22:14:53 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/07/01 00:02:33 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/18 09:51:03 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_.h"
+#include "ft_printf.h"
 
-static int	ft_nbrlen(int n)
+static int	ft_nbrlen(unsigned int n)
 {
-	if (n < 0)
-		n *= -1;
 	if (n >= 10)
 		return (1 + ft_nbrlen(n / 10));
 	return (1);
 }
 
-static void	intstr(char *str, size_t str_i, int n)
+static void	intstr(char *str, size_t str_i, unsigned int n)
 {
 	str[str_i] = (n % 10) + '0';
-	if (n >= 10)
+	if (n > 9)
 		intstr(str, --str_i, n / 10);
 }
 
-char	*ft_itoa(int n, char *base)
+char	*ft_uint_str(unsigned int n)
 {
 	char	*str;
-	size_t	str_size;
-	int	base_count;
+	size_t	str_len;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	str_size = ft_nbrlen(n) + 1;
-	if (n < 0)
-		str_size++;
-	str = malloc(sizeof(char) * str_size);
+	str_len = ft_nbrlen(n);
+	str = malloc(sizeof(char) * (str_len + 1));
 	if (str == NULL)
 		return (NULL);
-	str[--str_size] = '\0';
-	if (n < 0)
-	{
-		str[0] = '-';
-		n *= -1;
-	}
-	intstr(str, --str_size, n);
+	str[str_len--] = '\0';
+	intstr(str, str_len, n);
 	return (str);
 }
