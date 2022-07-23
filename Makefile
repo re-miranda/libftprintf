@@ -16,9 +16,6 @@ LIBFT = ./libft/libft.a
 
 all: $(NAME)
 
-#$(OBJS): $(SRCS)
-#	$(CC) $(CFLAGS) -I$(HEADER) $(SRCS)
-
 %.o:	%.c
 	$(CC) $(CFLAGS) -c -I$(HEADER) $< -o $(<:%.c=%.o)
 
@@ -33,6 +30,7 @@ $(LIBFT):
 clean:
 	make clean -C ./libft
 	$(RM) $(OBJ)
+	$(RM) $(OBJ_BONUS)
 
 fclean: clean
 	make fclean -C ./libft
@@ -44,9 +42,5 @@ bonus: $(OBJ_BONUS) $(LIBFT)
 	cp $(LIBFT) ./
 	mv ./libft.a $(NAME)
 	$(AR) $(NAME) $(OBJ_BONUS)
-
-main: $(NAME)
-	$(CC) $(CFLAGS) main.c -L./ -lftprintf
-	clear && ./a.out
 
 .PHONY: all clean fclean re
