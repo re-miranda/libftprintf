@@ -6,16 +6,16 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 02:37:07 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/07/18 09:53:11 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/23 09:36:15 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_type_c(t_data *data)
+char	*type_c(t_data *data)
 {
 	char	*result;
-	char	*width;
+	char	*width_str;
 	char	cha;
 
 	data->total_bytes_write++;
@@ -25,16 +25,16 @@ char	*ft_type_c(t_data *data)
 		data->width--;
 	if (!ft_strchr(data->found_flags, '-'))
 	{
-		width = ft_strdup("");
-		width = ft_apply_width(data, width);
-		write(1, width, ft_strlen(width));
-		free(width);
+		width_str = ft_strdup("");
+		width_str = width(data, width_str);
+		write(1, width_str, ft_strlen(width_str));
+		free(width_str);
 	}
 	write(1, &cha, 1);
 	return (result);
 }
 
-char	*ft_type_s(t_data *data)
+char	*type_s(t_data *data)
 {
 	char	*result;
 
@@ -51,7 +51,7 @@ char	*ft_type_s(t_data *data)
 	return (result);
 }
 
-char	*ft_type_d_i(t_data *data)
+char	*type_d_i(t_data *data)
 {
 	int		result;
 	char	*str_result;
@@ -75,7 +75,7 @@ char	*ft_type_d_i(t_data *data)
 	return (str_result);
 }
 
-char	*ft_type_u(t_data *data)
+char	*type_u(t_data *data)
 {
 	unsigned int	result;
 	char			*str_result;

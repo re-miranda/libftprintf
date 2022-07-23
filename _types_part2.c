@@ -6,19 +6,18 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 01:45:20 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/07/18 09:52:19 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/21 06:01:03 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_type_x(t_data *data)
+char	*type_x(t_data *data)
 {
 	char			*swap;
 	unsigned int	result;
 	char			*str_result;
 
-	swap = data->formatted_str;
 	result = va_arg(data->va_ptr, unsigned int);
 	str_result = ft_uint_base_str(result, "0123456789abcdef");
 	if (ft_strchr(data->found_flags, '#') && result)
@@ -30,7 +29,7 @@ char	*ft_type_x(t_data *data)
 	return (str_result);
 }
 
-char	*ft_type_xx(t_data *data)
+char	*type_xx(t_data *data)
 {
 	char			*swap;
 	unsigned int	result;
@@ -38,7 +37,6 @@ char	*ft_type_xx(t_data *data)
 	int				index;
 
 	index = 0;
-	swap = data->formatted_str;
 	result = va_arg(data->va_ptr, unsigned int);
 	str_result = ft_uint_base_str(result, "0123456789abcdef");
 	while (str_result[index])
@@ -55,13 +53,12 @@ char	*ft_type_xx(t_data *data)
 	return (str_result);
 }
 
-char	*ft_type_p(t_data *data)
+char	*type_p(t_data *data)
 {
 	char			*swap;
 	size_t			result;
 	char			*str_result;
 
-	swap = data->formatted_str;
 	result = va_arg(data->va_ptr, size_t);
 	if (result == 0)
 		str_result = ft_strdup("(nil)");
