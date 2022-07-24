@@ -6,7 +6,7 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:57:49 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/07/24 14:40:24 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/24 20:38:08 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	ft_printf(const char *format_string, ...)
 {
 	t_data	data;
 
+	if (!format_string)
+		return (-1);
 	if (format_string[0] == 0)
 		return (1);
 	intialize(format_string, &data);
