@@ -10,7 +10,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 
 OBJS = $(SRCS:%.c=%.o)
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -c
+CFLAGS = -Wall -Wextra -Werror
 AR = ar -rcs
 RM = rm -rf
 NAME = libft.a
@@ -18,7 +18,7 @@ NAME = libft.a
 all: $(NAME)
 
 $(OBJS): $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS)
+	$(CC) $(CFLAGS) -c $(SRCS)
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
