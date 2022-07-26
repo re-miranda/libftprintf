@@ -6,7 +6,7 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 20:57:49 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/07/24 20:38:08 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/26 18:05:43 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void	interpret_format_string(t_data *data)
 static void	intialize(const char *format_string, t_data *data)
 {
 	data->total_bytes_write = 0;
+	data->found_flags[5] = 0;
 	data->src_str = ft_strdup(format_string);
 	data->original_src_str = data->src_str;
 	ft_strlcpy(data->valid_flags, "-0# +", 6);
