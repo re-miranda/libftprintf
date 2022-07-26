@@ -6,7 +6,7 @@
 /*   By: rmiranda <rmiranda@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 10:16:16 by rmiranda          #+#    #+#             */
-/*   Updated: 2022/07/23 10:37:09 by rmiranda         ###   ########.fr       */
+/*   Updated: 2022/07/27 00:10:32 by rmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	apply_precision(char *swap, char **result, char *sign, t_data *data)
 		if (ft_strchr("-+ ", *swap))
 		{
 			ft_memcpy((*result + data->precision - ft_strlen(swap) + 1),
-				(swap + 1), data->precision);
+				(swap + 1), ft_strlen(swap) - 1);
 			free(swap);
 			swap = *result;
 			*result = ft_strjoin(sign, *result);
 		}
 		else
 			ft_memcpy((*result + data->precision - ft_strlen(swap)),
-				swap, data->precision);
+				swap, ft_strlen(swap));
 		free(swap);
 	}
 	else if (data->precision == 0 && *result[0] == '0')
@@ -48,8 +48,11 @@ char	*precision(t_data *data, char *result)
 		data->total_bytes_write += ft_strlen(result);
 		return (result);
 	}
-	if (data->type == 's')
-		result[data->precision] = 0;
+	if ((int)ft_strlen(result) > data->precision)
+	{
+		if (data->type == 's')
+			result[data->precision] = 0;
+	}
 	if (ft_strchr("diuxX", data->type))
 		apply_precision(swap, &result, sign, data);
 	data->total_bytes_write += ft_strlen(result);
